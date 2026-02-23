@@ -163,4 +163,4 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = config("EMAIL_HOST_USER")
 AUTH_USER_MODEL = "api.User"
 SITE_NAME = "Job Tracker"
-DOMAIN = "localhost:3000"
+DOMAIN = "virat.pythonanywhere.com"
