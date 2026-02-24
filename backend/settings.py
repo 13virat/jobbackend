@@ -24,7 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ['virat.pythonanywhere.com', 'www.virat.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    'virat.pythonanywhere.com',
+    'www.virat.pythonanywhere.com',
+    'job-three-ruddy.vercel.app',
+]
 
 
 # Application definition
@@ -130,7 +134,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "https://job-three-ruddy.vercel.app",
+]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -150,7 +159,6 @@ DJOSER = {
         "activation": "djoser.email.ActivationEmail",
     },
 }
-AUTH_USER_MODEL = 'api.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -163,4 +171,8 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = config("EMAIL_HOST_USER")
 AUTH_USER_MODEL = "api.User"
 SITE_NAME = "Job Tracker"
-DOMAIN = "virat.pythonanywhere.com"
+CSRF_TRUSTED_ORIGINS = [
+    "https://job-three-ruddy.vercel.app",
+]
+
+DOMAIN = "job-three-ruddy.vercel.app"
