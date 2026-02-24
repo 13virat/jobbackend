@@ -24,13 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
+# ALLOWED_HOSTS = [
+#     'virat.pythonanywhere.com',
+#     'www.virat.pythonanywhere.com',
+#     'job-three-ruddy.vercel.app',
+# ]
+
+
 ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
     'virat.pythonanywhere.com',
     'www.virat.pythonanywhere.com',
     'job-three-ruddy.vercel.app',
 ]
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -136,7 +143,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = False
 
+# CORS_ALLOWED_ORIGINS = [
+#     "https://job-three-ruddy.vercel.app",
+# ]
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://job-three-ruddy.vercel.app",
 ]
 
@@ -171,7 +183,12 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = config("EMAIL_HOST_USER")
 AUTH_USER_MODEL = "api.User"
 SITE_NAME = "Job Tracker"
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://job-three-ruddy.vercel.app",
+# ]
 CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://job-three-ruddy.vercel.app",
 ]
 
