@@ -63,18 +63,26 @@ class Job(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="wishlist")
 
-    location = models.CharField(max_length=255, blank=True, null=True)
-    salary = models.CharField(max_length=100, blank=True, null=True)
-
-    applied_date = models.DateField()
-
-    deadline = models.DateField(blank=True, null=True)
-
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default="medium")
 
-    notes = models.TextField(blank=True, null=True)
+    salary = models.CharField(max_length=100, blank=True, null=True)
 
-    url = models.URLField(blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+
+    job_url = models.URLField(blank=True, null=True)
+
+    source = models.CharField(max_length=100, blank=True, null=True)
+
+    # status dependent fields
+    deadline = models.DateField(blank=True, null=True)
+
+    applied_date = models.DateField(blank=True, null=True)
+
+    interview_datetime = models.DateTimeField(blank=True, null=True)
+
+    interview_link = models.URLField(blank=True, null=True)
+
+    notes = models.TextField(blank=True, default="")
 
     created_at = models.DateTimeField(auto_now_add=True)
 
