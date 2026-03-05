@@ -12,6 +12,8 @@ class JobSerializer(serializers.ModelSerializer):
             "deadline": {"required": False, "allow_null": True},
             "applied_date": {"required": False, "allow_null": True},
             "interview_datetime": {"required": False, "allow_null": True},
+            "offer_date": {"required": False, "allow_null": True},
+            "rejected_date": {"required": False, "allow_null": True},
         }
 
     def validate(self, data):

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
 
@@ -66,28 +67,36 @@ class Job(models.Model):
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default="medium")
 
     salary = models.CharField(max_length=100, blank=True, null=True)
-
     location = models.CharField(max_length=255, blank=True, null=True)
 
     job_url = models.URLField(blank=True, null=True)
-
     source = models.CharField(max_length=100, blank=True, null=True)
 
-    # status dependent fields
     deadline = models.DateField(blank=True, null=True)
-
     applied_date = models.DateField(blank=True, null=True)
 
     interview_datetime = models.DateTimeField(blank=True, null=True)
-
     interview_link = models.URLField(blank=True, null=True)
 
-    notes = models.TextField(blank=True, default="")
+    offer_date = models.DateField(blank=True, null=True)
+    rejected_date = models.DateField(blank=True, null=True)
 
+    notes = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.company} - {self.position}"
+
+    
+    def save(self, *args, **kwargs):
+
+        if self.status == "offer" and not self.offer_date:
+            self.offer_date = timezone.now().date()
+
+        if self.status == "rejected" and not self.rejected_date:
+            self.rejected_date = timezone.now().date()
+
+        super().save(*args, **kwargs)
 
 
 class Contact(models.Model):
