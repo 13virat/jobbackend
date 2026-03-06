@@ -87,15 +87,35 @@ class Job(models.Model):
     def __str__(self):
         return f"{self.company} - {self.position}"
 
-    
     def save(self, *args, **kwargs):
 
-        if self.status == "offer" and not self.offer_date:
-            self.offer_date = timezone.now().date()
+        if self.status == "wishlist":
+            self.applied_date = None
+            self.interview_datetime = None
+            self.offer_date = None
+            self.rejected_date = None
 
-        if self.status == "rejected" and not self.rejected_date:
-            self.rejected_date = timezone.now().date()
+        elif self.status == "applied":
+            if not self.applied_date:
+                self.applied_date = timezone.now().date()
+            self.interview_datetime = None
+            self.offer_date = None
+            self.rejected_date = None
 
+        elif self.status == "interview":
+            self.offer_date = None
+            self.rejected_date = None
+
+        elif self.status == "offer":
+            if not self.offer_date:
+                self.offer_date = timezone.now().date()
+            self.rejected_date = None
+
+        elif self.status == "rejected":
+            if not self.rejected_date:
+                self.rejected_date = timezone.now().date()
+            self.offer_date = None
+                         
         super().save(*args, **kwargs)
 
 
